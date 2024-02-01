@@ -7,6 +7,10 @@ import { useBus, useService } from "@web/core/utils/hooks";
 import { Dropdown } from "@web/core/dropdown/dropdown";
 
 export class AppsMenu extends Dropdown {
+	static template = 'muk_web_theme.AppsMenu';
+    static props = {
+    	...Dropdown.props
+    };
     setup() {
     	super.setup();
     	this.commandPaletteOpen = false;
@@ -50,7 +54,3 @@ export class AppsMenu extends Dropdown {
     	useBus(this.env.bus, "ACTION_MANAGER:UI-UPDATED", this.close);
     }
 }
-
-Object.assign(AppsMenu, {
-    template: 'muk_web_theme.AppsMenu',
-});
