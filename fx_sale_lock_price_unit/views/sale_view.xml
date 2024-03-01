@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard -->
+        <record id="sale_order_price_unit_change_form" model="ir.ui.view">
+            <field name="name">sale.order.price.unit.change.wizard.form</field>
+            <field name="model">sale.order.price.unit.change</field>
+            <field name="arch" type="xml">
+                <form string="Actualizar Precio">
+                    <p class="oe_grey">
+                        Ingresa el precio del producto
+                    </p>
+                    <group >
+                        <field name="price_unit" nolabel="1" required="1" />
+                    </group>
+                    <footer>
+                        <button string="Actualizar" name="execute_price" type="object" default_focus="1" class="btn-primary" icon="fa-cogs"/>
+                        <button string=" Cerrar" class="btn-default" special="cancel" icon="fa-window-close"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_sale_order_price_unit_change_wizard" model="ir.actions.act_window">
+            <field name="name">Cambiar precio</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order.price.unit.change</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sale_order_price_unit_change_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help"></field>
+            <field name="binding_model_id" ref="sale.model_sale_order_line" />
+        </record>
+
+        <!-- Sale order Inherit  -->
+
+        <record id="view_order_form_inherit_block_price_city" model="ir.ui.view">
+            <field name="name">view.order.form.inherit.block.price</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Lineas de Venta -->
+                <xpath expr="///field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">
+                        1
+                    </attribute>
+                    <attribute name="force_save">
+                        1
+                    </attribute>
+                </xpath>
+                <xpath expr="///field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <button name="%(action_sale_order_price_unit_change_wizard)d" string="Precio" icon="fa-money" 
+                        type="action" data-hotkey="k" groups="fx_sale_lock_price_unit.fx_sale_lock_price_unit_wizard"  
+                        invisible="state != 'draft'"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

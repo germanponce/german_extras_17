@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <template id="boarding_sheet_labels_document">
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+
+.tg {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                  }
+.tg td, .tg th {
+padding: 0;
+background-color: white; /* Establece el fondo blanco */
+}
+</style>
+            <t t-call="web.basic_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <t t-set="invoice_lines_print_list_values" t-value="o.get_invoice_lines_to_number_pages_print()" />
+                <t t-foreach="invoice_lines_print_list_values" t-as="line">
+                    <div class="page">
+                        <table class="tg">
+                            <thead>
+                              <tr style="border: 1px solid;border-color: transparent;">
+                                <!-- <th class="tg-cly1">Nombre Fletera</th> -->
+                                <th class="tg-cly1" colspan="2"><span t-field="o.partner_shipping_id.x_studio_fletera" /></th>
+                                <!-- <th class="tg-cly1">Fecha</th> -->
+                                <th class="tg-cly1" colspan="2" style="font-align:left"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr style="border: 1px solid;border-color: transparent;">
+                                <!-- <td class="tg-cly1">Direccion de Entrega</td> -->
+                                <td class="tg-cly1" colspan="4">
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.street.upper()" t-if="o.partner_shipping_id.x_studio_fletera.street" />, No. 
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.street_number.upper()" t-if="o.partner_shipping_id.x_studio_fletera.street_number" />, Colonia 
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.l10n_mx_edi_colony.upper()" t-if="o.partner_shipping_id.x_studio_fletera.l10n_mx_edi_colony" />, Ciudad 
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.city.upper()" t-if="o.partner_shipping_id.x_studio_fletera.city" />, Estado 
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.state_id.name.upper()" t-if="o.partner_shipping_id.x_studio_fletera.state_id" />, C.P. 
+                                    <span t-esc="o.partner_shipping_id.x_studio_fletera.zip.upper()" t-if="o.partner_shipping_id.x_studio_fletera.zip" /> TEL: <span t-esc="o.partner_shipping_id.x_studio_fletera.phone.upper()" t-if="o.partner_shipping_id.x_studio_fletera and o.partner_shipping_id.x_studio_fletera.phone" />
+                                </td>
+                              </tr>
+                              <tr style="border: 1px solid;border-color: transparent;">
+                                <!-- <td class="tg-cly1"># Factura</td> -->
+                                <td class="tg-cly1" colspan="2"><span t-field="o.name" /></td>
+                                <td class="tg-cly1" style="font-align:left">Cantidad</td>
+                                <td class="tg-cly1" style="font-align:left"><span t-esc="line['quantity_of']" /></td>
+                              </tr>
+                              <tr style="border: 1px solid;border-color: transparent;">
+                                <td class="tg-cly1" colspan="4"><span t-field="o.partner_shipping_id" /></td>
+                              </tr>
+                            </tbody>
+                            </table>
+                    <p style="page-break-after:always"></p>
+                    </div>
+                </t>
+           </t>
+        </template>
+
+
+        <template id="boarding_sheet_label_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="picao_boarding_sheet.boarding_sheet_labels_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+
+    <record id="boarding_sheet_report_label_paper" model="report.paperformat">
+        <field name="header_spacing">2</field>
+        <field name="margin_top">2</field>
+        <field name="margin_right">7</field>
+        <field name="margin_bottom">2</field>
+        <field name="margin_left">2</field>
+        <field name="header_line" eval="False"/>
+        <field name="name">Etiqueta</field>
+        <field name="orientation">Portrait</field>
+        <field name="dpi">90</field>
+        <field name="page_height">51</field>
+        <field name="page_width">102</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+    </record>
+
+
+    <record id="boarding_sheet_label_report" model="ir.actions.report">
+        <field name="name">Etiqueta (Fleteras)</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">picao_boarding_sheet.boarding_sheet_label_template</field>
+        <field name="report_file">picao_boarding_sheet.boarding_sheet_label_template</field>
+        <field name="print_report_name">'Etiqueta - '+object.name+'.pdf'</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="picao_boarding_sheet.boarding_sheet_report_label_paper" />
+    </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <template id="boarding_sheet_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <style type="text/css">
+                .tg  {border: 1px solid;border-color: transparent;}
+                .tg td{border: 1px solid;border-color: transparent;font-family:Arial, sans-serif;font-size:14px;
+                  overflow:hidden;padding:10px 5px;word-break:normal;}
+                .tg th{border: 1px solid;border-color: transparent;font-family:Arial, sans-serif;font-size:14px;
+                  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                .tg .tg-cly1{text-align:left;vertical-align:middle}
+                .tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+                .tg .tg-0lax{text-align:left;vertical-align:top}
+                .tg {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                  }
+                  .tg td, .tg th {
+                    padding: 0;
+                    background-color: white; /* Establece el fondo blanco */
+                  }
+                </style>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <br/>
+                    <br/>
+                    <table class="tg">
+                        <thead>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <th class="tg-cly1">REMITENTE:</th>
+                            <th class="tg-cly1" style="text-align:center;" colspan="2"><b>************************************************</b></th>
+                            <th class="tg-cly1" style="text-align:right;">FECHA DE EMBARQUE:</th>
+                            <th class="tg-0lax" style="padding-left:10px;"><span t-field="o.x_studio_fecha_embarque" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">PICAO ALIMENTOS, S.A. DE C.V.</td>
+                            <td class="tg-cly1" colspan="2" style="text-align:center;"><b>********** HOJA DE EMBARQUE**********</b></td>
+                            <td class="tg-cly1" style="text-align:right;">FLETERA 1:</td>
+                            <td class="tg-cly1" style="padding-left:10px;">AUTOSAG<!-- <span t-field="o.partner_shipping_id.x_studio_fletera" /> --></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">64260</td>
+                            <td class="tg-cly1" colspan="2" style="text-align:center;"><b>************************************************</b></td>
+                            <td class="tg-cly1"><!-- FLETERA 2: --></td>
+                            <td class="tg-cly1"><!-- <span t-field="o.partner_shipping_id.x_studio_fletera_2" /> --></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">BUSTAMANTE</td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">TEL: 01 (81) 1969-4020</td>
+                            <td class="tg-1wig">FLETERA 1</td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-1wig">FLETERA 2</td>
+                            <td class="tg-0lax"></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">CORREO: <br/> <a href="mailto:compras@picaoalimentos.com">compras@picaoalimentos.com</a></td>
+                            <td class="tg-cly1">DESTINATARIO:</td>
+                            <td class="tg-cly1"><span t-field="o.partner_shipping_id.x_studio_fletera" /></td>
+                            <td class="tg-cly1">REMITIR A:</td>
+                            <td class="tg-cly1"><span t-field="o.partner_shipping_id.x_studio_fletera_2" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">CALLE Y NO.</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera.street.upper()" t-if="o.partner_shipping_id.x_studio_fletera.street" /> <span t-esc="o.partner_shipping_id.x_studio_fletera.street_number.upper()" t-if="o.partner_shipping_id.x_studio_fletera.street_number" /></td>
+                            <td class="tg-cly1">DIRECCION:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.street.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.street" /> <span t-esc="o.partner_shipping_id.x_studio_fletera_2.street_number.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.street_number" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">COLONIA:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera.l10n_mx_edi_colony.upper()" t-if="o.partner_shipping_id.x_studio_fletera.l10n_mx_edi_colony" /></td>
+                            <td class="tg-cly1">COLONIA:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.l10n_mx_edi_colony.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.l10n_mx_edi_colony" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">CIUDAD:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera.city.upper()" t-if="o.partner_shipping_id.x_studio_fletera.city" /></td>
+                            <td class="tg-cly1">CIUDAD:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.city.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.city" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">ESTADO:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera.state_id.name.upper()" t-if="o.partner_shipping_id.x_studio_fletera.state_id" /></td>
+                            <td class="tg-cly1">ESTADO:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.state_id.name.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.state_id" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">CP:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera.zip.upper()" t-if="o.partner_shipping_id.x_studio_fletera.zip" /> TEL: <span t-esc="o.partner_shipping_id.x_studio_fletera.phone.upper()" t-if="o.partner_shipping_id.x_studio_fletera and o.partner_shipping_id.x_studio_fletera.phone" /></td>
+                            <td class="tg-cly1">CP:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.zip.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.zip" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">TEL:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.phone.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2 and o.partner_shipping_id.x_studio_fletera_2.phone" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">DIAS RECIBO:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.x_studio_das_de_recibo_2.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.x_studio_das_de_recibo_2" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-cly1">HORARIO RECIBO:</td>
+                            <td class="tg-cly1"><span t-esc="o.partner_shipping_id.x_studio_fletera_2.x_studio_horario_de_recibo.upper()" t-if="o.partner_shipping_id.x_studio_fletera_2.x_studio_horario_de_recibo" /></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">CLIENTE: <span t-esc="o.partner_id.name.upper()" t-if="o.partner_id" /></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">FACTURA: <span t-esc="o.name" /></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                          </tr>
+                          <tr style="border: 1px solid;border-color: transparent;">
+                            <td class="tg-cly1">FECHA: <span t-field="o.invoice_date" t-options='{"widget": "date","format": "dd-MM-yyyy"}'/></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                            <td class="tg-0lax"></td>
+                          </tr>
+                        </tbody>
+                    </table>
+
+                    <t t-set="quantities_total" t-value="0"/>
+                    <t t-set="weight_total" t-value="0"/>
+
+                    <table class="table table-sm o_main_table table-borderless mt-4">
+                        <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                        <thead style="display: table-row-group">
+                            <tr style="border-bottom: 1px dashed black;">
+                                <th name="th_quantity" width="10%" class="text-end">Cantidad</th>
+                                <th name="th_code" width="15%" class="text-start">Codigo</th>
+                                <th name="th_description" width="50%" class="text-start">Descripción</th>
+                                <th name="th_peso_caja" width="12%" class="text-end">Peso/Caja</th>
+                                <th name="th_peso_total" width="13%" class="text-end">
+                                    <span>Peso Total</span>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="sale_tbody">
+
+                            <t t-set="current_subtotal" t-value="0"/>
+
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+
+                                <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="line.display_type == 'product'">
+                                        <t t-set="quantities_total" t-value="quantities_total + line.quantity"/>
+                                        <t t-set="weight_total" t-value="weight_total + (line.product_id.weight * line.quantity)"/>
+                                        <td name="td_quantity" class="text-end">
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_uom_id"/>
+                                        </td>
+                                        <td name="td_code">
+                                            <span t-field="line.product_id.default_code"/> 
+                                        </td>
+                                        <td name="td_description">
+                                            <span t-field="line.product_id.name"/>
+                                        </td>
+                                        
+                                        <td name="td_peso_caja" class="text-end">
+                                            <span t-field="line.product_id.weight"/>
+                                        </td>
+                                        <td name="td_peso_total" class="text-end">
+                                            <span t-esc="line.product_id.weight * line.quantity"/>
+                                        </td>
+                                    </t>
+
+                                    <t t-elif="line.display_type == 'line_section'">
+                                        <td name="td_section_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+
+                                    <t t-elif="line.display_type == 'line_note'">
+                                        <td name="td_note_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                    </t>
+
+                                </tr>
+
+                            </t>
+                        </tbody>
+                    </table>
+
+                     <!-- ************************************* TABLA DE TOTALES ************************************* -->
+                <table cellpadding="10" style="margin-left: auto;"> 
+                    <tr style="border: 1px solid;border-color: transparent;">
+                        <td colspan="2" width="70">
+                            
+                        </td>
+                    </tr>
+                    <tr style="border: 1px solid;border-color: transparent;">
+                        <td style="padding: 5px; text-align: right"><b>Unidades: </b></td>
+                        <td style="padding: 5px; text-align: right"><span t-esc="'{:0,.2f}'.format(quantities_total)" /> </td>
+                    </tr>
+                    <tr style="border: 1px solid;border-color: transparent;">
+                        <td style="padding: 5px; text-align: right"><b>Peso Total: </b></td>
+                        <td style="padding: 5px; text-align: right"><span t-esc="'{:0,.2f}'.format(weight_total)" /></td>
+                    </tr>
+                    <tr style="border: 1px solid;border-color: transparent;">
+                        <td style="padding: 5px; text-align: right"><b>Contenido: </b></td>
+                        <td style="padding: 5px; text-align: right">Dulces</td>
+                    </tr>
+                </table>
+
+                <br/>
+
+                <span>
+                    FAVOR DE MANDAR GUIA AL SIGUIENTE CORREO PARA SU PAGO: 
+                     compras@picaoalimentos.com <br/>
+                    Maniobras: <span t-esc="o.partner_shipping_id.x_studio_comentarios" />
+                </span>
+                <!-- ************************************* FIRMA ************************************* -->
+                <p align="center">
+                    <b>
+                        <br/>
+                        ________________________________________ <br/>
+                        AUTOSAG<br/>
+                        NOMBRE Y FIRMA DE RECIBIDO POR LA FLETERA<br/><br/><br/>
+                        ************************************************<br/>
+                        FLETE PAGADO POR PICAO ALIMENTOS S.A. DE C.V.<br/>
+                        ************************************************<br/>
+                    </b>
+                </p>
+
+                </div>
+           </t>
+        </template>
+
+
+        <template id="boarding_sheet_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="picao_boarding_sheet.boarding_sheet_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+
+    <record id="boarding_sheet_report_paper" model="report.paperformat">
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="header_spacing">20</field>
+        <field name="margin_top">25</field>
+        <field name="margin_right">7</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="name">Hoja de Embarque</field>
+        <field name="orientation">Portrait</field>
+        <field name="dpi">120</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+    </record>
+
+
+    <record id="boarding_sheet_report" model="ir.actions.report">
+        <field name="name">Hoja de Embarque (Fleteras)</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">picao_boarding_sheet.boarding_sheet_template</field>
+        <field name="report_file">picao_boarding_sheet.boarding_sheet_template</field>
+        <field name="print_report_name">'Hoja de Embarque - '+object.name+'.pdf'</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="picao_boarding_sheet.boarding_sheet_report_paper" />
+    </record>
+
+
+    </data>
+</odoo>
