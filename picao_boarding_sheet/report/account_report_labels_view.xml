@@ -63,56 +63,6 @@ background-color: white; /* Establece el fondo blanco */
            </t>
         </template>
 
-<template id="boarding_sheet_labels_document">
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;
-               font-size:14px;overflow:hidden;padding:3px 5px;word-break:normal;}
-        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;
-               font-size:14px;font-weight:normal;overflow:hidden;padding:3px 5px;word-break:normal;}
-        .tg .tg-cly1{text-align:left;vertical-align:middle;}
-    </style>
-
-    <t t-call="web.basic_layout">
-        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-        <t t-set="invoice_lines_print_list_values" t-value="o.get_invoice_lines_to_number_pages_print()" />
-        <t t-foreach="invoice_lines_print_list_values" t-as="line">
-            <div class="page">
-                <table class="tg">
-                    <thead>
-                        <tr style="border: 1px solid;border-color: transparent;">
-                            <th class="tg-cly1" colspan="2"><span t-field="o.partner_shipping_id.x_studio_fletera" /></th>
-                            <th class="tg-cly1" colspan="2" style="text-align:left"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border: 1px solid;border-color: transparent;">
-                            <td class="tg-cly1" style="text-align: justify;" colspan="4">
-                                <span t-esc="o.partner_shipping_id.street.upper()" t-if="o.partner_shipping_id.street" />, No. 
-                                <span t-esc="o.partner_shipping_id.street_number.upper()" t-if="o.partner_shipping_id.street_number" />, Colonia 
-                                <span t-esc="o.partner_shipping_id.l10n_mx_edi_colony.upper()" t-if="o.partner_shipping_id.l10n_mx_edi_colony" />, Ciudad 
-                                <span t-esc="o.partner_shipping_id.city.upper()" t-if="o.partner_shipping_id.city" />, Estado 
-                                <span t-esc="o.partner_shipping_id.state_id.name.upper()" t-if="o.partner_shipping_id.state_id" />, C.P. 
-                                <span t-esc="o.partner_shipping_id.zip.upper()" t-if="o.partner_shipping_id.zip" /> TEL: <span t-esc="o.partner_shipping_id.phone.upper()" t-if="o.partner_shipping_id and o.partner_shipping_id.phone" />
-                            </td>
-                        </tr>
-                        <tr style="border: 1px solid;border-color: transparent;">
-                            <td class="tg-cly1" colspan="2"><span t-field="o.name" /></td>
-                            <td class="tg-cly1" colspan="2" style="text-align:left;font-size:@bottom-size;">
-                                <strong><span t-esc="line['quantity_of']" /></strong>
-                            </td>
-                        </tr>
-                        <tr style="border: 1px solid;border-color: transparent;">
-                            <td class="tg-cly1" colspan="4"><strong><span t-field="o.partner_shipping_id" /></strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- Siempre utiliza toda la hoja -->
-                <div style="page-break-after: always; height: 0;">&nbsp;</div>
-            </div>
-        </t>
-    </t>
-</template>
 
         <template id="boarding_sheet_label_template">
             <t t-call="web.html_container">

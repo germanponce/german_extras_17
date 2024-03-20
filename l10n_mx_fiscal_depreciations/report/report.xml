@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+
+        <report
+            id="asset_inpc_export_report"
+            model="account.asset.asset"
+            string="Reporte INPC (XLSX)"
+            report_type="xlsx"
+            name="l10n_mx_fiscal_depreciations.export_data_asset.xlsx"
+            file="l10n_mx_fiscal_depreciations.export_data_asset.xlsx"
+            menu="True"
+            attachment_use="False"/>
+
+    </data>
+</odoo>

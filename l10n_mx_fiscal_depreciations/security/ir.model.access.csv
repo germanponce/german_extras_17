@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+banxico_inpc_data_access,banxico.inpc.data,model_banxico_inpc_data,,1,1,1,1
+banxico_inpc_data_period_access,banxico.inpc.data.period,model_banxico_inpc_data_period,,1,1,1,1
+banxico_inpc_data_assets_control_access,banxico.inpc.data.assets.control,model_banxico_inpc_data_assets_control,,1,1,1,1

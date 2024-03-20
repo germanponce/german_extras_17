@@ -1,0 +1,256 @@
+<section>
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Depreciacion Fiscal - INPC</h2>
+        </div>
+        <div class="oe_row oe_spaced">
+            <h4><p style="margin-left: 42px;  font-size:20px;">Este modulo permite adaptar las depreciaciones fiscales ofrecidas por Banxico  (INPC).</p></h4>
+        <br/>
+        <span class="text-left" style="font-size:20px;">
+             Se basan en porcentajes proporcionados por la ley, y en la p&aacute;gina de Banxico.
+        </span>
+        <h4><p style="margin-left: 42px;  font-size:20px;">El Catalogo de precios al consumidor se debera estar alimentando por medio del Catalogo en Contabilidad --> Configuracion --> Precios al Consumidor --> Catalogo INPC</p></h4>
+        <br/>
+        <br/>
+        <br/>
+        <div class="oe_demo oe_screenshot">
+            <img src="catalogo.png">
+        </div>
+        <br/>
+        <br/>
+        <h4><p style="margin-left: 42px;  font-size:20px;">Debemos alimentar la informaci&oacute;n brindada por la pagina oficial de Banxico e INEGI:</p></h4>
+        <br/>
+        <br/>
+        <div class="oe_demo oe_screenshot">
+            <img src="inpc.png">
+        </div>
+        <br/>
+        <br/>
+        <h4><p style="margin-left: 42px;  font-size:20px;">En Odoo quedaria:</p></h4>
+        <br/>
+        <br/>
+        <div class="oe_demo oe_screenshot">
+            <img src="inpc_odoo.png">
+        </div>
+        <br/>
+        <br/>
+        <h4><p style="margin-left: 42px;  font-size:20px;">En el catalogo de activos quedaria reflejada la informacion en la pesta&ntilde;a --> Precios al consumidor:</p></h4>
+        <br/>
+        <br/>
+        <div class="oe_demo oe_screenshot">
+            <img src="activos_precios.png">
+        </div>
+            <!-- <ul>
+                <li style="list-style:none !important;  font-size:20px;"><span style="color:green;"> &#9733;</span>&nbsp;&nbsp;
+                    Campa&ntilde;a
+                </li>
+                <li style="list-style:none !important;  font-size:20px;"><span style="color:green;"> &#9733;</span>&nbsp;&nbsp;
+                    Medio
+                </li>
+                <li style="list-style:none !important;  font-size:20px;"><span style="color:green;"> &#9733;</span>&nbsp;&nbsp;
+                    Recurso
+                </li>
+            </ul> -->
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <p>
+            <center><h1>Funcionamiento</h1></center> </p>
+            <span class="text-left" style="font-size:20px;">
+            Dentro del Catalogo INPC, al configurar el a&ntilde;o tambi&eacute;n debemos configurar los activos que incluiremos en esta depreciacion, estos deberan agregarse manualmente o por medio del asistente pulsando el bot&oacute;n 'Insertar Activos' en la pesta&ntilde;a 'Activos'  :
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="boton_insertar_activos.png">
+            </div>
+            <br/>
+            <br/>
+            <span class="text-left" style="font-size:20px;">
+            Seleccionamos los Activos y pulsamos Insertar:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="insertar_activos.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            Al a&ntilde;adir el activo podemos ingresar la inforamci&oacute;n referente al INPC de adquisici&oacute;n y mitad del periodo, inclusive ingresar el factor :
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="activo_manual.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            Podemos calcular manualmente los valores de los activos del A&ntilde;o que estamos depreciando, podemos pulsar el bot&oacute;n -> Calcular INPC para activos:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="calculo_manual.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            O para calcular solo los valores de un activo pulsamos sobre su propio boton en el listado:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="calculo_manual_linea.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            Las acciones anteriores actualizaran la informaci&oacute;n de la ficha del activo:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="activos_actualizada.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            Para la automatizaci&oacute;n del calculo de los datos para los periodos del INPC existe una accion planificada que se ejecutara cada mes para tratar de calcular la informacion en el A&ntilde;o que estamos depreciando:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="accion_automatizada.png">
+            </div>
+            <span class="text-left" style="font-size:20px;">
+            Las unicas acciones necesarias son abrir el A&ntilde;o del catalogo INPC y tener los activos seleccionados.
+            </span>
+            <br/>
+            <br/>
+            <center><h1>Notas:</h1></center>
+             <ul>
+                <li style="list-style:none !important;  font-size:20px;"><span style="color:green;"> &#9733;</span>&nbsp;&nbsp;
+                    Al calcular los valores para el INPC para:
+                    <ul>
+                        <li>Mitad Periodo</li>
+                        <li>Fecha de Adquisici&oacute;n</li>
+                    </ul>
+                    En caso de que no exista el registro de los periodos necesarios en el sistema, los valores no se estarian calculando.
+                </li>
+                <li style="list-style:none !important;  font-size:20px;"><span style="color:green;"> &#9733;</span>&nbsp;&nbsp;
+                   El a&ntilde;o que estamos calculando debera estar en estado 'Proceso' y solo puede estar abierto un registro a la vez. Esto nos ayuda a evitar errores durante el calculo  y que la informaci&oacute;n sea mas precisa.
+                </li>
+            </ul>
+            <br/>
+            <br/>
+            <center><h1>Reportes</h1></center>
+            <span class="text-left" style="font-size:20px;">
+            Con la informaci&oacute;n actualizada en los activos podemos imprimir el informe en Excel para su Analisis:
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="reporte_xlsx.png">
+            </div>
+            
+            <!--             
+            <br/>
+            <br/>
+            <span class="text-left" style="font-size:20px;">
+            Al crear seleccionar un cliente en facturas:
+                
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="error_seleccion.png">
+            </div>
+            <br/>
+            <br/>
+             <span class="text-left" style="font-size:20px;">
+            Al crear validar facturas:
+                
+            </span>
+            <br/>
+            <br/>
+             <div class="oe_demo oe_screenshot">
+                <img src="error_validar.png">
+            </div> -->
+        </div>
+    </div>
+</section>
+
+    <section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_picture">
+           <center> <h2 style="font-size:20px; color:blue;">Gestion de Depreciaciones por medio del Catalogo INEGI.</h2></center>
+        </div>
+    </div>
+</section>
+
+
+<!-- <section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <p>
+            <center><h1>Lo primero para la fusi&oacute;n es seleccionar el Producto:</h1></center> </p>
+            <br/>
+            <div class="oe_demo oe_screenshot">
+                <img src="seleccion_producto.png">
+            </div>
+            <br/>
+        </div>
+    </div>
+</section> -->
+
+
+<!-- <section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <p>
+            <center><h1>Dentro del asistente de pagos observaremos que al generar un pago que requiera una cuenta para ganancia o perdida en automatico tomara la cuenta configurada:</h1></center> </p>
+            <br/>
+            <div class="oe_demo oe_screenshot">
+                <img src="asistente.png">
+            </div>
+            <br/>
+        </div>
+        <span class="text-left" style="font-size:20px;">
+                Esto nos permite evitar algunos errores y automatizar un poco el proceso.
+        </span>
+    </div>
+</section> -->
+
+</section>
+
+<section class="oe_container" style="background-color: #007bff;">
+    <div class="oe_row ">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+            <h3 class="text-center" style="color:#FFF; font-size:20px;">Soporte gratuito para errores.</h3>
+        </div>
+            <span class="text-center" style="color:#FFF; font-size:20px;">
+                Tienes soporte gratuito para la correccion de errores o modificaciones de las leyendas o textos.
+            </span>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="background-color: #007bff;">
+    <div class="oe_row ">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+                <span class="text-center" style="color:#FFF; font-size:20px;">Contacto o Soporte</span>
+            </div>
+            <span>
+                <a href="mailto:german.ponce@outlook.com" style="color: #FFF !important;font-weight:bold; font-size:20px;">Escribenos</a> | <a style="color: #FFF !important;font-weight:bold; font-size:20px;" href="skype:german_442?chat">Contacto via Skype</a>
+            </span>
+        </div>
+        <div class="oe_row ">
+            <div class="oe_slogan text-center">
+                <div class="oe_span12">
+                    <span class="text-center" style="color:#FFF; font-size:20px;">Email : german.ponce@outlook.com</span><br/>
+                    <span class="text-center" style="color:#FFF; font-size:20px;">Skype : german_442</span><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

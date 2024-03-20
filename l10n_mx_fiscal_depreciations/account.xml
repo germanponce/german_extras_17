@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- PLANIFICACION DE LA DESCARGA -->
+
+
+<!--     <record id="cron_downloar_data_efos_edos_sat" model="ir.cron">
+        <field name="name">Sincronización de Listado de EFOS y EDOS con el SAT</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="code">model._run_download_efos_edos_list_from_sat()</field>
+        <field name="state">code</field>
+    </record>
+ -->
+    <!-- HERENCIA CLIENTES -->
+
+<!--     <record model="ir.ui.view" id="res_partner_efos_edos_form">
+        <field name="name">res.partner.tree.efos.edos</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <label for="status_ok" />
+                <div>
+                    <field name="status_ok" readonly="1" />
+                    <button class="oe_inline oe_link" name="button_info_efo" string="Info" type="object" icon="fa-close" attrs="{'invisible':[('status_ok','=','OK')]}"/>
+                </div>
+                
+            </field>
+        </field>
+    </record> -->
+
+<!-- Asistente de seleccion de activos -->
+
+    <act_window name="Seleccion Activos" id="act_inpc_assets_selector"
+        res_model="banxico.inpc.data.assets.wizard"
+        src_model="banxico.inpc.data"
+        view_mode="form" target="new"/>
+
+    <record id="inpc_assets_selector_form" model="ir.ui.view">
+        <field name="name">seleccion de activos</field>
+        <field name="model">banxico.inpc.data.assets.wizard</field>
+        <field name="arch" type="xml">
+           <form>
+                <separator string="Selecciona los Activos a insertar" />
+                <group>
+                    <field name="asset_ids" nolabel="1" domain="[('state','in',('draft','open'))]">
+                        <tree string="Activos" editable="bottom">
+                            <field name="name" />
+                            <field name="date" />
+                            <field name="state" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="action_insert" string="Insertar" type="object" class="btn-primary" icon="fa-cogs" />
+                    <button string="Cerrar" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- INPC -->
+
+    <record id="banxico_inpc_data_tree" model="ir.ui.view">
+        <field name="name">banxico.inpc.data.access.tree</field>
+        <field name="model">banxico.inpc.data</field>
+        <field name="arch" type="xml">
+            <tree string="Precios al Consumidor" >
+                <field name="year_id"/>
+                <field name="current_period"/>
+                <field name="inpc_current"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="banxico_inpc_data_form" model="ir.ui.view">
+        <field name="name">banxico.inpc.data.form</field>
+        <field name="model">banxico.inpc.data</field>
+        <field name="arch" type="xml">
+            <form string="Precio al Consumidor">
+                <header>
+                    <button name="action_draft" states="done" string=" Borrador" type="object" icon="fa-eraser"/>
+                    <button name="action_process" states="draft" string=" En Proceso" type="object" icon="fa-cogs"/>
+                    <button name="action_done" states="process" string=" Cerrar" type="object" icon="fa-check"/>
+                    <button name="compute_inpc_assets" states="process" string=" Calcular INPC para Activos" type="object" icon="fa-cogs" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" readonly="1"/>
+                </header>
+                <sheet>
+                     <div class="oe_title">
+                    <label class="oe_edit_only" for="year_id" string="Año Actual"/>
+                    <h1><field name="year_id" placeholder="2020...." required="1" options="{'no_create': True, 'no_create_edit': True}"/></h1>
+                    
+                </div>
+                <group>
+                    <group>
+                        <field name="current_period" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="inpc_current" readonly="1"/>
+                    </group>
+                </group>
+                
+                <notebook>
+                    <page string="Periodos">
+                        <separator string="Periodos" />
+                        <group>
+                            <field name="inpc_period_lines" nolabel="1">
+                                <tree string="INPC Periodos" editable="bottom">
+                                    <field name="period_name" readonly="1" />
+                                    <field name="period_id" required="1" options="{'no_create': True, 'no_create_edit': True}" domain="[('fiscalyear_id','=',parent.year_id)]"/>
+                                    <field name="inpc" required="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Activos">
+                        <separator string="Activos" />
+                        <button name='%(act_inpc_assets_selector)d' type='action' string='Insertar Activos' icon="fa-tasks"/>
+                        <group>
+                            <field name="inpc_assets_lines" nolabel="1" >
+                                <tree string="INPC Activos" editable="bottom">
+                                    <field name="asset_id" options="{'no_create': True, 'no_create_edit': True}" required="1"/>
+                                    <field name="currency_id" invisible="1" />
+                                    <field name="value" />
+                                    <field name="inpc_mitad" />
+                                    <field name="inp_mitad_period_id" options="{'no_create': True, 'no_create_edit': True}" nolabel="1"/>
+                                    <field name="inpc_adquisicion" />
+                                    <field name="inpc_adquisicion_period_id" options="{'no_create': True, 'no_create_edit': True}" nolabel="1"/>
+                                    <field name="inpc_factor" />
+                                    <field name="inpc_depresiacion" readonly="1"/>
+                                    <field name="compute_done" readonly="1"/>
+                                    <button name="compute_inpc_control" string="Calcular INPC" type="object" icon="fa-cogs"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </notebook>
+                
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="banxico_inpc_data_search" model="ir.ui.view">
+        <field name="name">banxico.inpc.data.search</field>
+        <field name="model">banxico.inpc.data</field>
+        <field name="arch" type="xml">
+            <search string="Busqueda Historico INPC">
+                <field name="year_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_banxico_inpc_data" model="ir.actions.act_window">
+        <field name="name">INPC</field>
+        <field name="res_model">banxico.inpc.data</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="banxico_inpc_data_tree"/>
+    </record>
+
+
+    <menuitem id="menu_banxico_inpc_data" name="Precios al Consumidor" 
+              parent="account.menu_finance_configuration" sequence="4" />
+
+    <menuitem id="menu_banxico_inpc_data_act" name="Catalogo INPC" 
+              parent="menu_banxico_inpc_data" sequence="1" action="action_banxico_inpc_data"/>
+
+
+
+</odoo>
