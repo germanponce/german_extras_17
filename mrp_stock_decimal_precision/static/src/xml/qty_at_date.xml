@@ -1,0 +1,38 @@
+<templates>
+
+    <div t-extend="sale_stock.QtyDetailPopOver">
+        <t t-jquery="tbody" t-operation='replace'>
+            
+            <tbody>
+                <t t-if="data.warehouse_existing_html">
+                    <tr>
+                        <td colspan="2">
+                            <h3>Existencias por Almacén:</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <t t-raw='data.warehouse_existing_html'/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-if="data.warehouse_existing_html">
+                    <tr>
+                        <td colspan="2">
+                            <h3>Precios:</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <t t-raw='data.prices_from_pricelist_html'/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </t>
+        <t t-jquery="button" t-operation='replace'>
+        </t>
+
+    </div>
+
+</templates>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record forcecreate="True" id="bom_line_quantity" model="decimal.precision">
+        <field name="name">Bom Line Quantity (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+    <record forcecreate="True" id="stock_move_real_quantity" model="decimal.precision">
+        <field name="name">Stock Move Real Quantity (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+    <record forcecreate="True" id="stock_move_demand_quantity" model="decimal.precision">
+        <field name="name">Stock Move Demand Quantity (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+    <record forcecreate="True" id="stock_move_quantity" model="decimal.precision">
+        <field name="name">Stock Move Quantity (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+    <record forcecreate="True" id="stock_move_line_quantity" model="decimal.precision">
+        <field name="name">Stock Move Line Quantity (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+    <record forcecreate="True" id="stock_move_line_quantity_uom" model="decimal.precision">
+        <field name="name">Stock Move Quantity UoM (MRP)</field>
+        <field name="digits">6</field>
+    </record>
+
+</odoo>
